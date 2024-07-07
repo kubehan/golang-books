@@ -5,7 +5,6 @@
 [![GitHub Stars](https://img.shields.io/github/stars/kubehan/golang-books?style=social)](https://github.com/kubehan/golang-books)
 [![CI覆盖率状态](https://img.shields.io/coveralls/github/kubehan/golang-books)](https://coveralls.io/github/kubehan/golang-books)
 [![Go报告卡](https://goreportcard.com/badge/github.com/kubehan/golang-books)](https://goreportcard.com/report/github.com/kubehan/golang-books)
-[![夜间状态](https://github.com/kubehan/golang-books/workflows/Nightly%20Status/badge.svg)](https://github.com/kubehan/golang-books/actions)
 [![CONFORMANCE_TEST](https://img.shields.io/badge/Conformance%20Test-Passed-green)](https://github.com/kubehan/golang-books/actions)
 
 
