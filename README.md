@@ -1,4 +1,23 @@
 # Golang学习笔记
+
+## 项目概览
+
+[![GitHub Stars](https://img.shields.io/github/stars/kubehan/golang-books?style=social)](https://github.com/kubehan/golang-books)
+[![CI覆盖率状态](https://img.shields.io/coveralls/github/kubehan/golang-books)](https://coveralls.io/github/kubehan/golang-books)
+[![Go报告卡](https://goreportcard.com/badge/github.com/kubehan/golang-books)](https://goreportcard.com/report/github.com/kubehan/golang-books)
+[![夜间状态](https://github.com/kubehan/golang-books/workflows/Nightly%20Status/badge.svg)](https://github.com/kubehan/golang-books/actions)
+[![CONFORMANCE_TEST](https://img.shields.io/badge/Conformance%20Test-Passed-green)](https://github.com/kubehan/golang-books/actions)
+
+
+## 项目简介
+
+本项目旨在提供一个全面的Golang学习资源平台，包括书籍推荐、教程、示例代码等，帮助学习者快速掌握Golang编程技能。
+
+## 如何参与
+
+- 如果你有任何问题或建议，欢迎在GitHub仓库中提交Issue或Pull Request。
+- 我们也欢迎你在GitHub上关注本项目，以便第一时间获取更新信息。
+
 ## 01_基础之变量和常量
 
 | 子目录 | 描述 |
