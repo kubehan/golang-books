@@ -1,0 +1,152 @@
+{% load tags %}
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+    <title></title>
+    <style type="text/css">
+        @media only screen and (min-device-width: 601px) {
+            .content {
+                width: 650px !important;
+            }
+        }
+
+        body {
+            font-size: 14px;
+            font-family: "Roboto", "Lucida Grande", "DejaVu Sans", "Bitstream Vera Sans", Verdana, Arial, sans-serif;
+        }
+
+        tr {
+            height: 40px;
+        }
+
+        th {
+            padding-left: 5px;
+            font-weight: 600;
+            font-size: 18px;
+            text-align: left;
+            color: #666;
+        }
+
+        td {
+            width: 40%;
+            padding-left: 5px;
+            font-weight: 600;
+            text-align: left;
+        }
+    </style>
+
+</head>
+<body>
+<div>
+    <h2>
+        {{ cluster.name }}（{{ cluster.abbreviation }}）服务器运行资源详情报告
+    </h2>
+    <p>
+        报告时间范围：{{ start_time }} ~ {{ end_time }}
+    </p>
+    <br/>
+    <h2>服务器运行详情（CPU使用率排序）： </h2>
+    <table width="100%" border="1" cellspacing="0" cellpadding="0">
+        <thead>
+        <tr>
+            <th>主机名</th>
+            <th>IP地址</th>
+            <th>CPU最大使用率</th>
+            <th>CPU平均使用率</th>
+            <th>内存最大使用率</th>
+            <th>内存平均使用率</th>
+            <th>硬盘总空间</th>
+            <th>硬盘使用量</th>
+            <th>硬盘使用百分比</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for report in reports|dictsortreversed:"cpu_max" %}
+        <tr>
+            <td>{{ report.hostname }}</td>
+            <td>{{ report.ip }}</td>
+            <td>{{ report.cpu_max }}</td>
+            <td>{{ report.cpu_mean }}</td>
+            <td>{{ report.mem_max }}</td>
+            <td>{{ report.mem_mean }}</td>
+            <td>{{ report.disk_total_bytes }}</td>
+            <td>{{ report.disk_used_bytes }}</td>
+            <td>{{ report.disk_used_percentage }}</td>
+        </tr>
+        {% endfor %}
+
+        </tbody>
+    </table>
+
+    <h2>服务器运行详情（内存使用率排序）： </h2>
+    <table width="100%" border="1" cellspacing="0" cellpadding="0">
+        <thead>
+        <tr>
+            <th>主机名</th>
+            <th>IP地址</th>
+            <th>内存最大使用率</th>
+            <th>CPU最大使用率</th>
+            <th>CPU平均使用率</th>
+            <th>内存平均使用率</th>
+            <th>硬盘总空间</th>
+            <th>硬盘使用量</th>
+            <th>硬盘使用百分比</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for report in reports|dictsortreversed:"mem_max" %}
+        <tr>
+            <td>{{ report.hostname }}</td>
+            <td>{{ report.ip }}</td>
+            <td>{{ report.mem_max }}</td>
+            <td>{{ report.cpu_max }}</td>
+            <td>{{ report.cpu_mean }}</td>
+            <td>{{ report.mem_mean }}</td>
+            <td>{{ report.disk_total_bytes }}</td>
+            <td>{{ report.disk_used_bytes }}</td>
+            <td>{{ report.disk_used_percentage }}</td>
+        </tr>
+        {% endfor %}
+
+        </tbody>
+    </table>
+
+    <h2>服务器运行详情（硬盘使用排序）： </h2>
+    <table width="100%" border="1" cellspacing="0" cellpadding="0">
+        <thead>
+        <tr>
+            <th>主机名</th>
+            <th>IP地址</th>
+            <th>硬盘使用百分比</th>
+            <th>CPU最大使用率</th>
+            <th>CPU平均使用率</th>
+            <th>内存最大使用率</th>
+            <th>内存平均使用率</th>
+            <th>硬盘总空间</th>
+            <th>硬盘使用量</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for report in reports|dictsortreversed:"disk_used_percentage" %}
+        <tr>
+            <td>{{ report.hostname }}</td>
+            <td>{{ report.ip }}</td>
+            <td>{{ report.disk_used_percentage }}</td>
+            <td>{{ report.cpu_max }}</td>
+            <td>{{ report.cpu_mean }}</td>
+            <td>{{ report.mem_max }}</td>
+            <td>{{ report.mem_mean }}</td>
+            <td>{{ report.disk_total_bytes }}</td>
+            <td>{{ report.disk_used_bytes }}</td>
+        </tr>
+        {% endfor %}
+
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

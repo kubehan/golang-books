@@ -9,16 +9,20 @@ type student struct {
 }
 type studentManager struct {
 	studentList []*student
+	idConter    int
 }
 
 func NewStudentManager() *studentManager {
 	return &studentManager{
 		studentList: make([]*student, 0, 100), //初始化切片
+		idConter:    1,
 	}
 }
 
 // 添加学生
 func (s *studentManager) AddStudent(NewStudent *student) {
+	NewStudent.id = s.idConter
+	s.idConter++
 	s.studentList = append(s.studentList, NewStudent) //在已有的切片后面添加元素
 	fmt.Println("添加成功", NewStudent.name, NewStudent.class, NewStudent.id)
 	fmt.Println(s.studentList)
@@ -47,8 +51,18 @@ func (s *studentManager) EditStudent(NewStudent *student) {
 func (s *studentManager) DeleteStudent(id int) {
 	for i, v := range s.studentList {
 		if v.id == id {
-			s.studentList = append(s.studentList[:i], s.studentList[i+1:]...)
-			fmt.Println("删除成功")
+			fmt.Println("找到学员信息")
+			fmt.Println("姓名: ", v.name, "班级", v.class, "学号", v.id)
+			fmt.Println("是否删除该学员信息(y/n)")
+			var confirm string
+			fmt.Scanf("%s\n", &confirm)
+			if confirm == "y" || confirm == "Y" {
+				s.studentList = append(s.studentList[:i], s.studentList[i+1:]...)
+				fmt.Println("删除成功")
+				return
+			} else {
+				fmt.Println("取消删除")
+			}
 			return
 		}
 	}
@@ -67,20 +81,25 @@ func getInput() *student {
 	var (
 		name  string
 		class string
-		id    int
 	)
 	fmt.Println("请输入学员信息姓名:")
 	fmt.Scanf("%s\n", &name)
 	fmt.Println("请输入学员班级信息:")
 	fmt.Scanf("%s\n", &class)
-	fmt.Println("请输入学员信息id:")
-	fmt.Scanf("%d\n", &id)
+	//fmt.Println("请输入学员信息id:")
+	//fmt.Scanf("%d\n", &id)
 	NewStudent := &student{
 		name:  name,
 		class: class,
-		id:    id,
+		//id:    id,
 	}
 	return NewStudent
+}
+func getID() int {
+	var id int
+	fmt.Println("请输入学员信息id:")
+	fmt.Scanf("%d\n", &id)
+	return id
 }
 
 func main() {
@@ -109,8 +128,10 @@ func main() {
 			sm.ShowStudent()
 		case 4:
 			fmt.Println("删除学员信息")
-			NewStudent := getInput()
-			sm.DeleteStudent(NewStudent.id)
+			id := getID()
+			//NewStudent := getInput()
+			sm.ShowStudent()
+			sm.DeleteStudent(id)
 
 		case 5:
 			fmt.Println("退出系统")
